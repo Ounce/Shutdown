@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shutdown"
         mc:Ignorable="d"
-        Title="MainWindow" Height="234" Width="662" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
+        Title="要关机了！" Height="234" Width="662" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" Activated="Window_Activated" >
     <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="109,68,0,0" Text="关机倒计时：" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="75"/>
-        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="189,63,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.384,0.386"/>
-
-
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="237,73,0,0" Text="关机倒计时（秒）：" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="113"/>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="374,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.384,0.386"/>
+        <Button x:Name="button" Content="取消" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Width="76" Click="button_Click"/>
     </Grid>
 </Window>
