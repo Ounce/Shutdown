@@ -52,26 +52,15 @@ namespace Shutdown
             label.Content = time.ToString();
             //MessageBox.Show(time.ToString());
             if (time <= 0)
-                Process.Start("c:/windows/system32/shutdown.exe", "-s");
+            {
+                Process.Start("c:/windows/system32/shutdown.exe", "-c 长时间不使用自动关机 -s -t 0");
+                Close();
+            }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void Start()
-        {
-            DateTime beginTime = DateTime.Now;
-            TimeSpan timeSpan;
-            while (up)
-            {
-                //Thread.Sleep(1000);
-                timeSpan = DateTime.Now - beginTime;
-                if (timeSpan.TotalSeconds > time)
-                    up = false;
-            }
-            Process.Start("c:/windows/system32/shutdown.exe", "-s");
         }
 
         private void Windows_Loaded(object sender, EventArgs e)
