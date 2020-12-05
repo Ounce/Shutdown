@@ -23,12 +23,15 @@ namespace Shutdown
     /// </summary>
     public partial class MainWindow : Window
     {
-        int time = 60000;
+        int time = 60;
         bool up = true;
         DispatcherTimer Timer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
+            grid.DataContext = time;
+            Timer.Tick += new EventHandler(TimerTick);
+            Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
             /*
             while (up)
@@ -41,6 +44,15 @@ namespace Shutdown
             Process.Start("c:/windows/system32/shutdown.exe", "-s");
             */
 
+        }
+
+        private void TimerTick(object sender, EventArgs e)
+        {
+            time--;
+            label.Content = time.ToString();
+            //MessageBox.Show(time.ToString());
+            if (time <= 0)
+                Process.Start("c:/windows/system32/shutdown.exe", "-s");
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -62,9 +74,9 @@ namespace Shutdown
             Process.Start("c:/windows/system32/shutdown.exe", "-s");
         }
 
-        private void Window_Activated(object sender, EventArgs e)
+        private void Windows_Loaded(object sender, EventArgs e)
         {
-          
+            
         }
     }
 }
