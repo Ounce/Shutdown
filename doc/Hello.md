@@ -1,0 +1,2 @@
+﻿# Hello
+该项目引用了.Net Core 3.1，因而需要下载并安装[.Net Core 3.1.0](https://download.visualstudio.microsoft.com/download/pr/a1510e74-b31a-4434-b8a0-8074ff31fb3f/b7de8ecba4a14d8312551cfdc745dea1/windowsdesktop-runtime-3.1.0-win-x64.exe)
