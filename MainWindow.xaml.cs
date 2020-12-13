@@ -23,7 +23,7 @@ namespace Shutdown
     /// </summary>
     public partial class MainWindow : Window
     {
-        int time = 60;
+        int time = 600;
         bool up = true;
         DispatcherTimer Timer = new DispatcherTimer();
         public MainWindow()
@@ -33,26 +33,25 @@ namespace Shutdown
             Timer.Tick += new EventHandler(TimerTick);
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
-            /*
-            while (up)
-            {
-                Thread.Sleep(1000);
-                timeSpan = DateTime.Now - beginTime;
-                if (timeSpan.TotalSeconds > time)
-                    up = false;
-            }
-            Process.Start("c:/windows/system32/shutdown.exe", "-s");
-            */
-
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
             time--;
             label.Content = time.ToString();
-            //MessageBox.Show(time.ToString());
-            if (time <= 0)
-                Process.Start("c:/windows/system32/shutdown.exe", "-s");
+            if (time <= 0 && up)
+            {
+                up = false;
+                time = 60;
+                textBlock.Text = "关机倒计时（秒）：";
+                this.WindowState = WindowState.Normal;
+                this.Show();
+            }
+            else
+            {
+                if (time <= 0)
+                    Process.Start("c:/windows/system32/shutdown.exe", "-c 长时间不使用自动关机 -s -t 0");
+            }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -60,18 +59,10 @@ namespace Shutdown
             Close();
         }
 
-        private void Start()
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
-            DateTime beginTime = DateTime.Now;
-            TimeSpan timeSpan;
-            while (up)
-            {
-                //Thread.Sleep(1000);
-                timeSpan = DateTime.Now - beginTime;
-                if (timeSpan.TotalSeconds > time)
-                    up = false;
-            }
-            Process.Start("c:/windows/system32/shutdown.exe", "-s");
+            time = 10;
+            up = true;
         }
 
         private void Windows_Loaded(object sender, EventArgs e)
