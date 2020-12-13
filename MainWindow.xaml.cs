@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +24,9 @@ namespace Shutdown
     /// </summary>
     public partial class MainWindow : Window
     {
-        int time = 600;
+        int time = 60;
+        long staytime = 600;
+        long stay;
         bool up = true;
         DispatcherTimer Timer = new DispatcherTimer();
         public MainWindow()
@@ -37,21 +40,21 @@ namespace Shutdown
 
         private void TimerTick(object sender, EventArgs e)
         {
+            stay = GetLastInputTime() / 1000;
+            if (stay < staytime)
+            {
+                textBlock.Text = "无操作时间（秒）";
+                label.Content = stay.ToString();
+                up = true;
+                return;
+            }
             time--;
+            textBlock.Text = "关机倒计时（秒）：";
             label.Content = time.ToString();
-            if (time <= 0 && up)
-            {
-                up = false;
-                time = 60;
-                textBlock.Text = "关机倒计时（秒）：";
-                this.WindowState = WindowState.Normal;
-                this.Show();
-            }
-            else
-            {
-                if (time <= 0)
-                    Process.Start("c:/windows/system32/shutdown.exe", "-c 长时间不使用自动关机 -s -t 0");
-            }
+            this.WindowState = WindowState.Normal;
+            this.Show();
+            if (time <= 0)
+                Process.Start("c:/windows/system32/shutdown.exe", "-c 长时间不使用自动关机 -s -t 0");
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -59,15 +62,32 @@ namespace Shutdown
             Close();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            time = 10;
-            up = true;
-        }
-
         private void Windows_Loaded(object sender, EventArgs e)
         {
             
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct LASTINPUTINFO
+        {
+            [MarshalAs(UnmanagedType.U4)]
+            public int cbSize;
+            [MarshalAs(UnmanagedType.U4)]
+            public uint dwTime;
+        }
+
+        [DllImport("user32.dll")]
+        static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
+
+        static long GetLastInputTime()
+        {
+            LASTINPUTINFO vLastInputInfo = new LASTINPUTINFO();
+            vLastInputInfo.cbSize = Marshal.SizeOf(vLastInputInfo);
+            if (!GetLastInputInfo(ref vLastInputInfo))
+            {
+                return 0;
+            }
+            return Environment.TickCount - (long)vLastInputInfo.dwTime;
         }
     }
 }

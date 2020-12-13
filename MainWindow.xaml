@@ -7,13 +7,8 @@
         mc:Ignorable="d"
         Title="要关机了！" Height="234" Width="662" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Windows_Loaded" Visibility="Visible" WindowState="Minimized">
     <Grid x:Name="grid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="211*"/>
-            <ColumnDefinition Width="451*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="26,73,0,0" Text="关机倒计时（秒）：" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="113" Grid.Column="1"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="210,87,0,0" Text="关机倒计时（秒）：" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="113"/>
         <Label x:Name="label"  HorizontalAlignment="Left" Margin="163,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.384,0.386" Grid.Column="1"/>
-        <Button x:Name="button" Content="取消" HorizontalAlignment="Left" Margin="178,138,0,0" VerticalAlignment="Top" Width="76" Click="button_Click" Grid.Column="1"/>
-        <Button x:Name="button1" Content="重新计时" HorizontalAlignment="Left" Margin="1,138,0,0" VerticalAlignment="Top" Width="76" Click="button1_Click" Grid.Column="1"/>
+        <Button x:Name="button" Content="取消" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Width="76" Click="button_Click" />
     </Grid>
 </Window>
