@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="要关机了！" Height="234" Width="662" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Windows_Loaded" Visibility="Visible" WindowState="Minimized">
     <Grid x:Name="grid">
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="210,87,0,0" Text="关机倒计时（秒）：" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="113"/>
-        <Label x:Name="label"  HorizontalAlignment="Left" Margin="163,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.384,0.386" Grid.Column="1"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="256,87,0,0" Text="关机倒计时（秒）：" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="113"/>
+        <Label x:Name="label" Content="time" HorizontalAlignment="Left" Margin="367,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.384,0.386"/>
         <Button x:Name="button" Content="取消" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Width="76" Click="button_Click" />
     </Grid>
 </Window>
